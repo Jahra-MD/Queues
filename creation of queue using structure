@@ -1,0 +1,86 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+#include<queue>
+using namespace std;
+struct MyQueue{
+    int front,rear;
+    unsigned size;
+    int* arr;
+};
+struct MyQueue* creation(unsigned size)
+{
+    struct MyQueue* q =(struct MyQueue*)malloc(sizeof(struct MyQueue));
+    q->front =q->rear =-1;
+    q->size =size;
+    q->arr =(int*)malloc(q->size*sizeof(int));
+    printf("queue is created \n");
+    return q;
+}
+void Enqueue(struct MyQueue* queue,int val)
+{
+    if(queue->rear ==queue->size -1)
+    {
+        printf("/n overflow condition");
+    }
+    else
+    {
+        if(queue->front ==-1) queue->front =0;
+        queue->rear++;
+        queue->arr[queue->rear] =val;
+        printf("\n %d is added into the queue",val);
+    }
+}
+void Dequeue(struct MyQueue* queue)
+{
+     if(queue->rear ==-1)
+    {
+        printf("queue is empty \n");
+    }
+    else
+    {
+        int temp =queue->arr[queue->front];
+        queue->front++;
+        if(queue->front >queue->rear)
+        {
+            queue->front =queue->rear =-1;
+        }
+        printf("\n %d is removed from queue",temp);
+    }
+}
+void Display(struct MyQueue* queue)
+{
+    printf("\n the element present in queue are \n");
+     if(queue->rear ==-1)
+    {
+        printf("queue is empty \n");
+    }
+    for(int i=queue->front;i<=queue->rear;i++)
+    {
+        printf("%d ",queue->arr[i]);
+    }
+    
+}
+int main() {
+    struct MyQueue* queue = creation(5);
+    Enqueue(queue,70);
+    Enqueue(queue,30);
+    Enqueue(queue,40);
+    Enqueue(queue,760);
+    
+    Dequeue(queue);
+    Dequeue(queue);
+    Display(queue);
+    return 0;
+}
+
+o/p
+queue is created 
+
+70 is added into the queue
+ 30 is added into the queue
+ 40 is added into the queue
+ 760 is added into the queue
+ 70 is removed from queue
+ 30 is removed from queue
+ the element present in queue are 
+40 760 
