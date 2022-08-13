@@ -1,0 +1,73 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+#define SIZE 6
+int queue[SIZE],front=-1,rear=-1;
+void Dequeue()
+{
+    if(rear==-1)
+    {
+        printf("\n underflow condition \n");
+    }
+    else
+    {
+      printf("\n %d is dequeued \n",queue[front]); 
+      front++;
+      
+      if(front >rear) front=rear=-1;
+    }
+}
+void Enqueue(int val)
+{
+    if(rear==SIZE-1)
+    {
+        printf("\n overflow of queue \n");
+    }
+    else
+    {
+        if(front==-1) front++;
+        rear++;
+        queue[rear] =val;
+        printf("\n element is Enqueue \n");
+    }
+}
+void Display()
+{
+    if(rear==-1)
+    {
+        printf("\n underflow condition \n");
+    }
+    for(int i=front;i<=rear;i++)
+    {
+        printf("%d ",queue[i]);
+    }
+    
+}
+int main() {
+    Enqueue(10);
+    Enqueue(120);
+    Enqueue(103);
+    Enqueue(104);
+    Enqueue(108);
+    
+    Dequeue();
+    Dequeue();
+    Display();
+    return 0;
+}
+
+o/p
+element is Enqueue 
+
+ element is Enqueue 
+
+ element is Enqueue 
+
+ element is Enqueue 
+
+ element is Enqueue 
+
+10 is dequeued 
+
+ 120 is dequeued 
+103 104 108 
