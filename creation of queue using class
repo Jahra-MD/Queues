@@ -1,0 +1,96 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+class Queue
+{
+    private:
+            int front,rear,currsize;
+            unsigned MaxSize;
+            int* arr;
+    public:
+           Queue(int x)
+           {
+               front=currsize =0;
+               MaxSize =x;
+               rear =MaxSize-1;
+                arr =new int [MaxSize];
+           }
+           void enqueue(int x);
+           void dequeue();
+           bool isfull();
+           bool isempty();
+           void display();
+};
+
+bool Queue::isfull()
+{
+    if(currsize==MaxSize)
+    {
+        cout<<" queue is full \n";
+    }
+    return(currsize==MaxSize);
+}
+
+bool Queue::isempty()
+{
+    if(currsize==0)
+    {
+        cout<<" queue is empty \n";
+    }
+    return(currsize==0);
+}
+void Queue::enqueue(int x)
+{
+    if(isfull()) return;
+    rear =(rear +1)%MaxSize;
+    arr[rear]=x;
+    currsize =currsize +1;
+    cout<<x<<" is enqueue in the queue \n";
+}
+
+void Queue::dequeue()
+{
+    if(isempty()) return;
+    int x =arr[front];
+    front =(front +1)%MaxSize;
+    currsize =currsize -1;
+    cout<<x<<" is dequeue in the queue \n";
+}
+void Queue::display()
+{
+     if(isempty()) return;
+     int i=front,j;
+     cout<<"the element in the queue are \n";
+     for(j=0;j<currsize;j++)
+     {
+         cout<<arr[(i+j)%MaxSize]<<" ";
+     }
+    
+}
+
+int main() {
+   Queue q =Queue(5);
+   q.enqueue(4);
+   q.enqueue(5);
+   q.enqueue(7);
+   q.enqueue(17);
+   q.enqueue(8);
+   q.dequeue();
+   q.enqueue(14);
+   q.enqueue(53);
+   q.display();
+    return 0;
+}
+
+
+o/p
+4 is enqueue in the queue 
+5 is enqueue in the queue 
+7 is enqueue in the queue 
+17 is enqueue in the queue 
+8 is enqueue in the queue 
+4 is dequeue in the queue 
+14 is enqueue in the queue 
+ queue is full 
+the element in the queue are 
+5 7 17 8 14 
