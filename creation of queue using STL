@@ -1,0 +1,28 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+#include<queue>
+int main() {
+    queue<int>q;
+    q.push(20);    //enqueue
+    q.push(3);
+    q.push(5);
+    q.push(7);
+    q.pop();        //dequeue
+    cout<<"the front is "<<q.front()<<endl;
+    cout<<"the rear is "<<q.back()<<endl;
+    cout<<"the size of queue "<<q.size()<<endl;
+    while(q.size()!=0)    //to display
+    {
+        cout<<q.front()<<" ";
+        q.pop();
+    }
+    return 0;
+}
+
+
+o/p
+the front is 3
+the rear is 7
+the size of queue 3
+3 5 7 
