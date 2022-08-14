@@ -1,0 +1,99 @@
+// Online C++ compiler to run C++ program online
+#include <iostream>
+using namespace std;
+struct Queue
+{
+   int front,rear,currSize;
+   unsigned MaxCapacity;
+   int* arr;
+};
+struct Queue* Creation(unsigned MaxSize)
+{
+    struct Queue* q =(struct Queue*)malloc(sizeof(struct Queue));
+    q->MaxCapacity =MaxSize;
+    q->front=q->currSize =0;
+    q->rear =q->MaxCapacity -1;
+    q->arr =(int*)malloc(q->MaxCapacity * sizeof(int));
+    cout<<" queue is created "<<endl;
+    return q;
+    
+}
+bool isfull(struct Queue* q)
+{
+    if(q->currSize ==q->MaxCapacity)
+    {
+        cout<<"Cant enter the element \n";
+    }
+    return(q->currSize ==q->MaxCapacity);
+    
+}
+bool isEmpty(struct Queue* q)
+{
+    if(q->currSize ==0)
+    {
+        cout<<"queue is empty\n";
+    }
+    return(q->currSize ==0);
+    
+}
+void Enqueue(struct Queue* q,int val)
+{
+    if(isfull(q))
+    {
+        return;
+    }
+    q->rear =(q->rear +1)%q->MaxCapacity;
+    q->arr[q->rear] =val;
+    q->currSize =q->currSize +1;
+    cout<<val<<" is enqueued in the queue \n";
+}
+void Dequeue(struct Queue* q)
+{
+    if(isEmpty(q))
+    {
+        return;
+    }
+    int item =q->arr[q->front];
+    q->front =(q->front +1)%q->MaxCapacity;
+    q->currSize =q->currSize-1;
+    cout<<item<<" is dequeued in the queue \n";
+}
+void display(struct Queue* q)
+{
+     if(isEmpty(q))
+    {
+        return;
+    }
+    int i =q->front,j;
+    cout<<"the element in the queue are \n";
+    for(j=0;j<q->currSize ;j++)
+    {
+        cout<<q->arr[(i+j)%q->MaxCapacity]<<" ";
+    }
+}
+int main() {
+    struct Queue* q =Creation(5);
+    Enqueue(q,8);
+    Enqueue(q,5);
+    Enqueue(q,51);
+    Enqueue(q,15);
+    Dequeue(q);
+    Dequeue(q);
+    Enqueue(q,18);
+    Enqueue(q,1);
+    display(q);
+    return 0;
+}
+
+o/p
+queue is created 
+8 is enqueued in the queue 
+5 is enqueued in the queue 
+51 is enqueued in the queue 
+15 is enqueued in the queue 
+8 is dequeued in the queue 
+5 is dequeued in the queue 
+18 is enqueued in the queue 
+1 is enqueued in the queue 
+the element in the queue are 
+51 15 18 1 
